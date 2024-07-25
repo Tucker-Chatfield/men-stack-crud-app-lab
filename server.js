@@ -10,6 +10,9 @@ mongoose.connection.on("connected", () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
 
+const Dog = require("./models/dogs.js");
+app.use(express.urlencoded({ extended: false }));
+
 // GET /
 app.get("/", async (req, res) => {
   res.send("hello, friend!");
@@ -18,6 +21,15 @@ app.get("/", async (req, res) => {
 app.get("/", async (req, res) => {
   res.render("index.ejs");
 });
+
+app.get("/dogs/new", (req, res) => {
+  res.render("dogs/new.ejs");
+});
+
+// POST /
+app.post("/dogs", async (req, res) => {
+  console.log(req.body);
+})
 
 
 // LISTEN
