@@ -26,6 +26,11 @@ app.get("/dogs/new", (req, res) => {
   res.render("dogs/new.ejs");
 });
 
+app.get("/dogs", async (req, res) => {
+  const allDogs = await Dog.find();
+  res.render("/dogs/index.ejs", { dogs: allDogs });
+});
+
 // POST /
 app.post("/dogs", async (req, res) => {
   if (req.body.likesToPlay === "on") {
