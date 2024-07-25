@@ -28,7 +28,7 @@ app.get("/dogs/new", (req, res) => {
 
 app.get("/dogs", async (req, res) => {
   const allDogs = await Dog.find();
-  res.render("/dogs/index.ejs", { dogs: allDogs });
+  res.render("dogs/index.ejs", { dogs: allDogs });
 });
 
 // POST /
@@ -39,7 +39,7 @@ app.post("/dogs", async (req, res) => {
     req.body.likesToPlay = false;
   }
   await Dog.create(req.body);
-  res.redirect("/dogs/new");
+  res.redirect("/dogs");
 });
 
 
