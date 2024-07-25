@@ -5,6 +5,6 @@ const dogSchema = new mongoose.Schema({
   isReadyToEat: Boolean,
 });
 
-const Dog = mongoose.model("Fruit", dogSchema);
+const Dog = mongoose.model("Dog", dogSchema);
 
 module.exports = Dog;
