@@ -28,8 +28,14 @@ app.get("/dogs/new", (req, res) => {
 
 // POST /
 app.post("/dogs", async (req, res) => {
-  console.log(req.body);
-})
+  if (req.body.likesToPlay === "on") {
+    req.body.likesToPlay = true;
+  } else {
+    req.body.likesToPlay = false;
+  }
+  await Dog.create(req.body);
+  res.redirect("/dogs/new");
+});
 
 
 // LISTEN
