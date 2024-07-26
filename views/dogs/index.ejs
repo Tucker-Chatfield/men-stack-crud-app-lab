@@ -6,10 +6,11 @@
   <title>Dogs Index</title>
 </head>
 <body>
+  <a href="/dogs/new">Add New Dog</a>
   <h1>All Dogs</h1>
   <ul>
     <% dogs.forEach(dog => { %>
-      <li><%= dog.name %></li>
+      <li><a href="/dogs/<%= dog._id %>"><%= dog.name %></a></li>
    <% }); %>
   </ul>
 </body>

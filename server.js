@@ -15,23 +15,27 @@ app.use(express.urlencoded({ extended: false }));
 
 // GET /
 app.get("/", async (req, res) => {
-  res.send("hello, friend!");
-});
-
-app.get("/", async (req, res) => {
   res.render("index.ejs");
 });
 
-app.get("/dogs/new", (req, res) => {
-  res.render("dogs/new.ejs");
-});
-
+// GET /dogs
 app.get("/dogs", async (req, res) => {
   const allDogs = await Dog.find();
   res.render("dogs/index.ejs", { dogs: allDogs });
 });
 
-// POST /
+//GET /dogs/new
+app.get("/dogs/new", (req, res) => {
+  res.render("dogs/new.ejs");
+});
+
+// GET /dogs/:dogId
+app.get("/dogs/:dogId", async (req, res) => {
+  const foundDog = await Dog.findById(req.params.dogId);
+  res.render("dogs/show.ejs", { dog: foundDog });
+});
+
+// POST /dogs
 app.post("/dogs", async (req, res) => {
   if (req.body.likesToPlay === "on") {
     req.body.likesToPlay = true;
