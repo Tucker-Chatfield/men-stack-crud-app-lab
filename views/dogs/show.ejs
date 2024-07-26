@@ -7,10 +7,10 @@
 </head>
 <body>
   <h1><%= dog.name %></h1>
-  <% if (dog.likesToPlay) { %>
-      <p>This dog likes to play!</p>
+  <% if (dog.highEnergy) { %>
+      <p>This dog is high energy!</p>
   <% } else { %>
-      <p>This dog does not like to play!</p>
+      <p>This dog is low energy!</p>
   <% } %>
 
   <form action="/dogs/<%=dog._id%>?_method=DELETE" method="POST">

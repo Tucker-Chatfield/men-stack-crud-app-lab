@@ -41,10 +41,10 @@ app.get("/dogs/:dogId", async (req, res) => {
 
 // POST /dogs
 app.post("/dogs", async (req, res) => {
-  if (req.body.likesToPlay === "on") {
-    req.body.likesToPlay = true;
+  if (req.body.highEnergy === "on") {
+    req.body.highEnergy = true;
   } else {
-    req.body.likesToPlay = false;
+    req.body.highEnergy = false;
   }
 
   await Dog.create(req.body);
@@ -65,10 +65,10 @@ app.get('/dogs/:dogId/edit', async (req, res) => {
 
 // PUT
 app.put('/dogs/:dogId', async (req, res) => {
-  if (req.body.likesToPlay === "on") {
-    req.body.likesToPlay = true;
+  if (req.body.highEnergy === "on") {
+    req.body.highEnergy = true;
   } else {
-    req.body.likesToPlay = false;
+    req.body.highEnergy = false;
   }
 
   await Dog.findByIdAndUpdate(req.params.dogId, req.body);
