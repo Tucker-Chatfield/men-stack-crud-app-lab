@@ -2,6 +2,8 @@ const dotenv = require("dotenv");
 dotenv.config(); 
 const express = require("express");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -12,6 +14,8 @@ mongoose.connection.on("connected", () => {
 
 const Dog = require("./models/dogs.js");
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride("_method"));
+app.use(morgan("dev"));
 
 // GET /
 app.get("/", async (req, res) => {
@@ -42,10 +46,34 @@ app.post("/dogs", async (req, res) => {
   } else {
     req.body.likesToPlay = false;
   }
+
   await Dog.create(req.body);
   res.redirect("/dogs");
 });
 
+// DELETE /dogs/dogId
+app.delete("/dogs/:dogId", async (req, res) => {
+  await Dog.findByIdAndDelete(req.params.dogId);
+  res.redirect("/dogs");
+});
+
+// GET /dogs/dogId/edit
+app.get('/dogs/:dogId/edit', async (req, res) => {
+  const foundDog = await Dog.findById(req.params.dogId);
+  res.render('dogs/edit.ejs', { dog: foundDog });
+});
+
+// PUT
+app.put('/dogs/:dogId', async (req, res) => {
+  if (req.body.likesToPlay === "on") {
+    req.body.likesToPlay = true;
+  } else {
+    req.body.likesToPlay = false;
+  }
+
+  await Dog.findByIdAndUpdate(req.params.dogId, req.body);
+  res.redirect(`/dogs/${req.params.dogId}`);
+})
 
 // LISTEN
 app.listen(3000, () => {
