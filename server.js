@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
+const path = require("path");
 
 const app = express();
 
@@ -12,10 +13,14 @@ mongoose.connection.on("connected", () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
 
+// Imports the Dog model
 const Dog = require("./models/dogs.js");
+
+// middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(morgan("dev"));
+app.use(express.static(path.join(__dirname, 'public')))
 
 // GET /
 app.get("/", async (req, res) => {

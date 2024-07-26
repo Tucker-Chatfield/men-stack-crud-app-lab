@@ -4,19 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= dog.name %></title>
+  <link rel="stylesheet" href="../public/stylesheets/style.css">
 </head>
 <body>
-  <h1><%= dog.name %></h1>
-  <% if (dog.highEnergy) { %>
-      <p>This dog is high energy!</p>
-  <% } else { %>
-      <p>This dog is low energy!</p>
-  <% } %>
+  <div class="dog-details">
+    <h1><%= dog.name %></h1>
+    <% if (dog.highEnergy) { %>
+        <p>This dog is high energy!</p>
+    <% } else { %>
+        <p>This dog is low energy!</p>
+    <% } %>
 
-  <form action="/dogs/<%=dog._id%>?_method=DELETE" method="POST">
-    <button type="submit">Delete <%= dog.name %></button>
-  </form>
+    <form action="/dogs/<%=dog._id%>?_method=DELETE" method="POST">
+      <button type="submit">Delete <%= dog.name %></button>
+    </form>
   <a href="/dogs/<%=dog._id%>/edit">Edit <%= dog.name %></a>
-  <a href="/dogs">Back to Dogs</a>
+  </div>
+  <a class="dogs-index-link" href="/dogs">
+    <div class="index-link-text">Back to Dogs</div>
+  </a>
 </body>
 </html>

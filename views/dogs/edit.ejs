@@ -4,9 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="../public/stylesheets/style.css">
 </head>
 <body>
-  <a href="/dogs">Back to Dogs</a>
+  <a class="dogs-index-link" href="/dogs">
+    <div class="index-link-text">Back to Dogs</div>
+  </a>
     <h1>Edit <%= dog.name %></h1>
     <form action="/dogs/<%= dog._id %>?_method=PUT" method="POST">
       <label for="name">Name:</label>
